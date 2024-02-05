@@ -50,6 +50,7 @@ enum sol_keycodes {
 #define QWERTY   DF(_QWERTY)
 #define SOUL     DF(_SOUL)
 #define FN_CAPS  LT(_FN, KC_CAPS)
+#define MUT_PLY  LT(KC_MPLY, KC_MUTE)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -60,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_J,   KC_NO,                 KC_RCBR, KC_B,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT,
         KC_LCTL, KC_LGUI, KC_LALT, ADJUST, KC_NO, KC_SPC, KC_NO, KC_DEL, KC_ENT, KC_NO, KC_SPC, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_RCTL,
 
-        KC_MS_WH_DOWN, KC_MS_WH_UP, KC_MNXT, KC_MPLY, KC_MPRV,                                                  KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
+        KC_MS_WH_DOWN, KC_MS_WH_UP, KC_MNXT, MUT_PLY, KC_MPRV,                                      KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
     ),
 
     [_QWERTY] = LAYOUT(
