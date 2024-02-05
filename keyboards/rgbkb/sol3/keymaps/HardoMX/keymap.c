@@ -1,4 +1,3 @@
-
 /*
  * ----------------------------------------------------------------------------
  * "THE BEER-WARE LICENSE" (Revision 42):
@@ -50,7 +49,7 @@ enum sol_keycodes {
 #define QWERTY   DF(_QWERTY)
 #define SOUL     DF(_SOUL)
 #define FN_CAPS  LT(_FN, KC_CAPS)
-#define MUT_PLY  LT(KC_MPLY, KC_MUTE)
+#define MUT_PLY  LT(KC_MUTE, KC_MPLY) // LT does not do tap-hold for normal keys, find way
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
