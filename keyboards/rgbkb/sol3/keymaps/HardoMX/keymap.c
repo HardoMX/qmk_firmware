@@ -25,7 +25,7 @@
  *                                    │      │ DEL  │  │ Enter│      │
  *                                    └──────┴──────┘  └──────┴──────┘
  * ┌──────┬──────┬──────┬──────┬──────┐                              ┌──────┬──────┬──────┬──────┬──────┐
- * │Vol Dn│Vol Up│ Prev │ Play │ Next │                              │Vol Dn│Vol Up│ Prev │ Play │ Next │
+ * │Scr dn│scr up│ Prev │ Play │ Next │                              │Vol Dn│Vol Up│ Prev │ Play │ Next │
  * └──────┴──────┴──────┴──────┴──────┘                              └──────┴──────┴──────┴──────┴──────┘
  */
 
@@ -50,7 +50,6 @@ enum sol_keycodes {
 #define QWERTY   DF(_QWERTY)
 #define SOUL     DF(_SOUL)
 #define FN_CAPS  LT(_FN, KC_CAPS)
-#define RGB_ADJ  LT(_ADJUST, RGB_TOG)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -59,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_L,    KC_D,  KC_P,   KC_NO,                 KC_MINS, KC_K,   KC_M,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
         FN_CAPS, KC_A,    KC_S,    KC_R,    KC_T,  KC_G,   KC_NO,                 KC_RPRN, KC_F,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_J,   KC_NO,                 KC_RCBR, KC_B,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT,
-        KC_LCTL, KC_LGUI, KC_LALT, RGB_ADJ, KC_NO, KC_SPC, KC_NO, KC_DEL, KC_ENT, KC_NO, KC_SPC, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_RCTL,
+        KC_LCTL, KC_LGUI, KC_LALT, ADJUST, KC_NO, KC_SPC, KC_NO, KC_DEL, KC_ENT, KC_NO, KC_SPC, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_RCTL,
 
         KC_MS_WH_DOWN, KC_MS_WH_UP, KC_MNXT, KC_MPLY, KC_MPRV,                                                  KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
     ),
@@ -89,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RGB_SAD, RGB_VAI, RGB_SAI, QK_BOOT, _______, _______,                   _______, _______, KC_P7,   KC_P8,   KC_P9,   _______, _______,
         _______, RGB_HUD, RGB_VAD, RGB_HUI, RGB_RST, _______, DM_REC1,                   _______, _______, KC_P4,   KC_P5,   KC_P6,   _______, _______,
         _______, RGB_SPD, _______, RGB_SPI, _______, _______, DM_RSTP,                   _______, _______, KC_P1,   KC_P2,   KC_P3,   _______, SOUL,
-        _______, RGB_RMOD,RGB_TOG, RGB_MOD, _______, _______, _______, _______, _______, _______, _______, KC_P0,   KC_PDOT, KC_NUM,  _______, QWERTY,
+        _______, RGB_RMOD,RGB_TOG, _______, RGB_MOD, _______, _______, _______, _______, _______, _______, KC_P0,   KC_PDOT, KC_NUM,  _______, QWERTY,
 
         _______, _______, _______, _______, _______,                                                       _______, _______, _______, _______, _______
     ),
