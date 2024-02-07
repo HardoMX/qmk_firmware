@@ -28,7 +28,7 @@
  * └──────┴──────┴──────┴──────┴──────┘                              └──────┴──────┴──────┴──────┴──────┘
  */
 
-enum sol_layers {
+enum layers {
     _SOUL,
     _QWERTY,
     _FN,
@@ -44,7 +44,7 @@ enum sol_keycodes {
     RGB_RST
 };
 
-enum hardo_keycodes {
+enum swedish_keys{
     AE = RALT(KC_Q),
     AO = RALT(KC_W),
     OE = RALT(KC_P)
