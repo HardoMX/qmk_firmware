@@ -55,6 +55,7 @@ enum swedish_keys{
 #define QWERTY   DF(_QWERTY)
 #define SOUL     DF(_SOUL)
 #define FN_CAPS  LT(_FN, KC_CAPS)
+#define FN_CWTG  LT(_FN, KC_NO)
 #define MUT_PLY  LT(KC_MUTE, KC_MPLY) // LT does not do tap-hold for normal keys, find way
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SOUL] = LAYOUT(
         QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,  KC_5,   KC_NO,                 KC_EQL,  KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
         KC_TAB,  KC_Q,    KC_W,    KC_L,    KC_D,  KC_P,   KC_NO,                 KC_MINS, KC_K,   KC_M,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
-        FN_CAPS, KC_A,    KC_S,    KC_R,    KC_T,  KC_G,   KC_NO,                 KC_NO,   KC_F,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+        FN_CWTG, KC_A,    KC_S,    KC_R,    KC_T,  KC_G,   KC_NO,                 KC_NO,   KC_F,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_J,   KC_NO,                 KC_NO,   KC_B,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT,
         KC_LCTL, KC_LGUI, KC_LALT, ADJUST, KC_NO, KC_SPC, KC_NO, KC_DEL, KC_ENT, KC_NO, KC_SPC, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_RCTL,
 
@@ -129,6 +130,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 touch_encoder_toggle();
             }
             return false;  // Skip all further processing of this key
+        case LT(_FN, KC_NO):
+            if (record->tap.count && record->event.pressed) {
+                caps_word_on();
+                return false;
+            }
+            return true;
         default:
             return true;
     }
