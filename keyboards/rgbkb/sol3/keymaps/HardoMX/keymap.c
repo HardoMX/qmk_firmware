@@ -136,6 +136,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;
+        case LT(_SOUL, KC_LBRC):
+            if (record->tap.count && record->event.presed) {
+                tap_code16(KC_LBRC);
+            }
+            else if (record->event.pressed) {
+                tap_code16(KC_RBRC);
+            }
         default:
             return true;
     }
