@@ -54,20 +54,20 @@ enum swedish_keys{
 #define ADJUST   MO(_ADJUST)
 #define QWERTY   DF(_QWERTY)
 #define SOUL     DF(_SOUL)
-#define FN_CAPS  LT(_FN, KC_CAPS)
-#define FN_CWTG  LT(_FN, KC_NO)
-#define MUT_PLY  LT(KC_MUTE, KC_MPLY) // LT does not do tap-hold for normal keys, find way
+#define FN_CWTG  LT(_FN, KC_CAPS) // tap does CAPS-WORD, hold switches to FN layer
+#define BRCKTS   LT(_SOUL, KC_LBRC) // tap does [, holding does ]
+#define CURLS    LT(_SOUL, KC_NO) // tap does {, holding does }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SOUL] = LAYOUT(
-        QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,  KC_5,   KC_NO,                 KC_EQL,  KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-        KC_TAB,  KC_Q,    KC_W,    KC_L,    KC_D,  KC_P,   KC_NO,                 KC_MINS, KC_K,   KC_M,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
-        FN_CWTG, KC_A,    KC_S,    KC_R,    KC_T,  KC_G,   KC_NO,                 KC_NO,   KC_F,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_J,   KC_NO,                 KC_NO,   KC_B,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT,
-        KC_LCTL, KC_LGUI, KC_LALT, ADJUST, KC_NO, KC_SPC, KC_NO, KC_DEL, KC_ENT, KC_NO, KC_SPC, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_RCTL,
+        QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,  KC_5,   KC_NO,                 KC_BSLS,  KC_6,   KC_7,    KC_8,    KC_9,    KC_0,   ADJUST,
+        KC_TAB,  KC_Q,    KC_W,    KC_L,    KC_D,  KC_P,   KC_NO,                 KC_NO, KC_K,   KC_M,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT,
+        FN_CWTG, KC_A,    KC_S,    KC_R,    KC_T,  KC_G,   KC_NO,                 BRCKTS,   KC_F,   KC_N,    KC_E,    KC_I,    KC_O,   KC_MINS,
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_J,   KC_NO,                 CURLS,   KC_B,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_GRAVE,
+        KC_LCTL, KC_LGUI, KC_NO, ADJUST, KC_LALT, KC_SPC, KC_NO, KC_DEL, KC_ENT, KC_NO, KC_BSPC, AO, AE, OE, KC_EQL, KC_RCTL,
 
-        KC_MS_WH_DOWN, KC_MS_WH_UP, KC_MNXT, MUT_PLY, KC_MPRV,                                      KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
+        KC_MS_WH_DOWN, KC_MS_WH_UP, KC_MNXT, KC_MPLY, KC_MPRV,                                      KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
     ),
 
     [_QWERTY] = LAYOUT(
@@ -91,8 +91,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_ADJUST] = LAYOUT(
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______,                   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-        _______, RGB_SAD, RGB_VAI, RGB_SAI, QK_BOOT, _______, _______,                   _______, _______, KC_P7,   KC_P8,   KC_P9,   _______, _______,
+        QK_BOOT, _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, _______,
+        _______, RGB_SAD, RGB_VAI, RGB_SAI, _______, _______, _______,                   _______, _______, KC_P7,   KC_P8,   KC_P9,   _______, _______,
         _______, RGB_HUD, RGB_VAD, RGB_HUI, RGB_RST, _______, DM_REC1,                   _______, _______, KC_P4,   KC_P5,   KC_P6,   _______, _______,
         _______, RGB_SPD, _______, RGB_SPI, _______, _______, DM_RSTP,                   _______, _______, KC_P1,   KC_P2,   KC_P3,   _______, SOUL,
         _______, RGB_RMOD,RGB_TOG, _______, RGB_MOD, _______, _______, _______, _______, _______, _______, KC_P0,   KC_PDOT, KC_NUM,  _______, QWERTY,
@@ -130,19 +130,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 touch_encoder_toggle();
             }
             return false;  // Skip all further processing of this key
-        case LT(_FN, KC_NO):
+        case LT(_FN, KC_CAPS):
             if (record->tap.count && record->event.pressed) {
                 caps_word_on();
                 return false;
             }
             return true;
         case LT(_SOUL, KC_LBRC):
-            if (record->tap.count && record->event.presed) {
-                tap_code16(KC_LBRC);
+            if (record->tap.count && record->event.pressed) {
+                return true;
             }
             else if (record->event.pressed) {
                 tap_code16(KC_RBRC);
             }
+            return true;
+        case LT(_SOUL, KC_NO):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_LCBR);
+            }
+            else if (record->event.pressed) {
+                tap_code16(KC_RCBR);
+            }
+            return true;
         default:
             return true;
     }
