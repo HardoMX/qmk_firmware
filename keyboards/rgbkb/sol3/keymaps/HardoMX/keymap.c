@@ -152,6 +152,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(KC_RCBR);
             }
             return true;
+        case KC_QUOT:
+            tap_code(KC_SPACE);
+            return true;
+        case KC_GRAVE:
+            tap_code(KC_SPACE);
+            return true;
         default:
             return true;
     }
