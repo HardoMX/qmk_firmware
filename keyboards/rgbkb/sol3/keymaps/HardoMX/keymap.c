@@ -35,13 +35,15 @@ enum layers {
     _ADJUST
 };
 
-enum sol_keycodes {
+enum custom_keycodes {
     // Disables touch processing
     TCH_TOG = SAFE_RANGE,
     MENU_BTN,
     MENU_UP,
     MENU_DN,
     RGB_RST,
+
+    // Fix ', ", and ` on US-INTL layout
     QUOT,
     GRAVE
 };
