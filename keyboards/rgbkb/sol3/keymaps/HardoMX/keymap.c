@@ -42,6 +42,8 @@ enum custom_keycodes {
     MENU_UP,
     MENU_DN,
     RGB_RST,
+    QUOT,
+    GRAVE,
 };
 
 enum swedish_keys {
@@ -62,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SOUL] = LAYOUT(
         QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,  KC_5,   KC_MPRV,                 KC_BSLS,  KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    ADJUST,
-        KC_TAB,  KC_Q,    KC_W,    KC_L,    KC_D,  KC_P,   KC_MPLY,                 KC_PIPE,  KC_K,   KC_M,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT,
+        KC_TAB,  KC_Q,    KC_W,    KC_L,    KC_D,  KC_P,   KC_MPLY,                 KC_PIPE,  KC_K,   KC_M,    KC_U,    KC_Y,    KC_SCLN, QUOT,
         FN_CWTG, KC_A,    KC_S,    KC_R,    KC_T,  KC_G,   KC_MNXT,                 BRCKTS,   KC_F,   KC_N,    KC_E,    KC_I,    KC_O,    KC_MINS,
-        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_J,   KC_NO,                   CURLS,    KC_B,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_GRAVE,
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_J,   KC_NO,                   CURLS,    KC_B,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, GRAVE,
         KC_LCTL, KC_LGUI, KC_NO,  ADJUST,  KC_LALT,KC_SPC, KC_HOME, KC_DEL, KC_ENT, KC_END,   KC_BSPC,AO,      AE,      OE,      KC_EQL,  KC_RCTL,
 
         KC_MS_WH_DOWN, KC_MS_WH_UP, KC_MNXT, KC_MPLY, KC_MPRV,                                      KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, KC_MPRV
@@ -152,6 +154,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(KC_RCBR);
             }
             return true;
+        case QUOT:
+            if (record->event.pressed) {
+                tap_code(KC_QUOT);
+                tap_code(KC_SPACE);
+            }
+            return false
+        case GRAVE:
+            if (record->event.pressed) {
+                tap_code(KC_GRAVE);
+                tap_code(KC_SPACE);
+            }
+            return false
         default:
             return true;
     }
